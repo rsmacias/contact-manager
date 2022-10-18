@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cm", "cm\cm.csproj", "{8B6DBAFB-0CEA-4397-B9A0-BEC3DB3E51B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.ContactManager.Lib", "Acme.ContactManager.Lib\Acme.ContactManager.Lib.csproj", "{140E14BE-ECC9-4179-A676-5D2DB22C411D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Acme.ContactManager.Lib.Tests", "Acme.ContactManager.Lib.Tests\Acme.ContactManager.Lib.Tests.csproj", "{CC766446-4E7F-40F4-B570-A3AC86ADEAAF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -10,5 +16,19 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8B6DBAFB-0CEA-4397-B9A0-BEC3DB3E51B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B6DBAFB-0CEA-4397-B9A0-BEC3DB3E51B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B6DBAFB-0CEA-4397-B9A0-BEC3DB3E51B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B6DBAFB-0CEA-4397-B9A0-BEC3DB3E51B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{140E14BE-ECC9-4179-A676-5D2DB22C411D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{140E14BE-ECC9-4179-A676-5D2DB22C411D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{140E14BE-ECC9-4179-A676-5D2DB22C411D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{140E14BE-ECC9-4179-A676-5D2DB22C411D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC766446-4E7F-40F4-B570-A3AC86ADEAAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC766446-4E7F-40F4-B570-A3AC86ADEAAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC766446-4E7F-40F4-B570-A3AC86ADEAAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC766446-4E7F-40F4-B570-A3AC86ADEAAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
