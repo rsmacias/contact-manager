@@ -1,5 +1,6 @@
 ﻿namespace Acme.ContactManager.Lib;
-public class Contact {
+
+public class Contact : IComparable<Contact> {
     public int? ID { get; }
     public string FirstName { get; }
     public string LastName { get; }
@@ -41,5 +42,47 @@ public class Contact {
 
     public override int GetHashCode() {
         return ToString().GetHashCode();
+    }
+
+    public int CompareTo(Contact other) {
+        int comp;
+
+        comp = String.Compare(this.FirstName, other.FirstName);
+        if(comp != 0) return comp;
+
+        comp = String.Compare(this.LastName, other.LastName);
+        if(comp != 0) return comp;
+
+        comp = String.Compare(this.StreetAddress, other.StreetAddress);
+        if(comp != 0) return comp;
+
+        comp = String.Compare(this.City, other.City);
+        if(comp != 0) return comp;
+
+        comp = String.Compare(this.State, other.State);
+        if(comp != 0) return comp;
+
+        comp = String.Compare(this.PostalCode, other.PostalCode);
+        if(comp != 0) return comp;
+
+        if (this.ID.HasValue && other.ID.HasValue) {
+            // if they both have an ID they must match
+            comp = this.ID.Value.CompareTo(other.ID.Value);
+            if(comp != 0) return comp;
+        } else {
+            // if they aren't both not set (then only one must be set because of the previous condition)
+            return this.ID.HasValue ? 1 : -1;
+        }
+
+        return 0;
+    }
+
+    public override bool Equals(object obj) {
+        if (!(obj is Contact)) 
+            return false;
+        
+        Contact other = (Contact) obj;
+        
+        return CompareTo(other) == 0;
     }
 }
