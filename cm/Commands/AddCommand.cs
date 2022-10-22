@@ -9,6 +9,6 @@ internal class AddCommand : Command {
     }
 
     public override IEnumerable<Contact> Execute() {
-        return new List<Contact> { Store.Add(null) };
+        return new List<Contact> { Store.Add(CommandArgParser.ContactFromArgs(Args)) };
     }
 }

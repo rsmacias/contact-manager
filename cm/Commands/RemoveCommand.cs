@@ -9,6 +9,6 @@ internal class RemoveCommand : Command {
     }
 
     public override IEnumerable<Contact> Execute() {
-        return new List<Contact> { Store.Remove(null) };
+        return new List<Contact> { Store.Remove(CommandArgParser.ContactFromArgs(Args)) };
     }
 }
