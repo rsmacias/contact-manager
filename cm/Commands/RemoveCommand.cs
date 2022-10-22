@@ -4,7 +4,7 @@ namespace cm;
 
 internal class RemoveCommand : Command {
     public RemoveCommand(ContactStore store, IReadOnlyDictionary<string, string> args)
-        : base("remove", args, store) {
+        : base(Commands.Remove, args, store) {
         
     }
 

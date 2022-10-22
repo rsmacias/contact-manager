@@ -4,7 +4,7 @@ namespace cm;
 
 internal class ListCommand : Command {
     public ListCommand(ContactStore store, IReadOnlyDictionary<string, string> args)
-        : base("list", args, store) {
+        : base(Commands.List, args, store) {
         
     }
 

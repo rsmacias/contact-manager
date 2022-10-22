@@ -4,7 +4,7 @@ namespace cm;
 
 internal class AddCommand : Command {
     public AddCommand(ContactStore store, IReadOnlyDictionary<string, string> args)
-        : base("add", args, store) {
+        : base(Commands.Add, args, store) {
         
     }
 
