@@ -11,23 +11,9 @@ public class ContactStore : IContactStore {
 
         Contact withId = Contact.CreateWithId(nextId++, contact);
 
-        if(contactCount == contacts.Length)
-            return null; // Add: inserting contact failed - contact list full
+        var added = InsertedSorted(withId);
 
-        // place it at the end
-        contacts[contactCount] = withId;
-
-        // Sort the array 
-        // walk it forward to it's appropiate spot 
-        for (int i=contactCount; i>0; i--) {
-            if(contacts[i].CompareTo(contacts[i-1]) <= 0) {
-                // Swaping spots
-                Swap(i, i-1);
-            }
-        }
-
-        contactCount++;
-        return withId;
+        return added;
     }
 
     public Contact Remove (Contact contact) {
@@ -45,5 +31,28 @@ public class ContactStore : IContactStore {
         Contact temp = contacts[index1];
         contacts[index1] = contacts[index2];
         contacts[index2] = temp;
+    }
+
+    private Contact InsertedSorted(Contact contact) {
+        // 0.- Validate full container
+        if(contactCount == contacts.Length)
+            return null; // Add: inserting contact failed - contact list full
+
+        // 1.- Place it at the end
+        contacts[contactCount] = contact;
+
+        // 2.- Sort the array 
+        // walk it forward to it's appropiate spot 
+        for (int i=contactCount; i>0; i--) {
+            if(contacts[i].CompareTo(contacts[i-1]) <= 0) {
+                // Swaping spots
+                Swap(i, i-1);
+            }
+        }       
+
+        // 3.- Update counter
+        contactCount++;
+
+        return contact;
     }
 }
