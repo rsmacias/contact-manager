@@ -55,6 +55,8 @@ internal class Repl {
                     return factory.Remove(args);
                 case Commands.List:
                     return factory.List(args);
+                case Commands.Quit:
+                    return factory.Quit();
                 default:
                     return factory.Unknown();
             }
@@ -64,7 +66,7 @@ internal class Repl {
     }
 
     private bool ParseLine(string line, out string verb, out IReadOnlyDictionary<string, string> args) {
-        verb = Commands.Add;
+        verb = line.Contains("quit") ? Commands.Quit : Commands.Add;
         var fields = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         fields["f"] = "Robert";
         fields["l"] = "Macias";

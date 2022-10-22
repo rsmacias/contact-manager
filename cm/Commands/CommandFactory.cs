@@ -20,6 +20,10 @@ internal class CommandFactory {
         return new ListCommand(store, args);
     }
 
+    public ICommand Quit() {
+        return new QuitCommand();
+    }
+
     public ICommand SyntaxError() {
         return new SyntaxErrorCommand();
     }
