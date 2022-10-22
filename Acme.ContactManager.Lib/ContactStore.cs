@@ -22,9 +22,7 @@ public class ContactStore : IContactStore {
         for (int i=contactCount; i>0; i--) {
             if(contacts[i].CompareTo(contacts[i-1]) <= 0) {
                 // Swaping spots
-                Contact temp = contacts[i];
-                contacts[i] = contacts[i-1];
-                contacts[i-1] = temp;
+                Swap(i, i-1);
             }
         }
 
@@ -41,5 +39,11 @@ public class ContactStore : IContactStore {
             for(int i=0; i<contactCount; i++) 
                 yield return contacts[i];
         } 
+    }
+
+    private void Swap(int index1, int index2) {
+        Contact temp = contacts[index1];
+        contacts[index1] = contacts[index2];
+        contacts[index2] = temp;
     }
 }
