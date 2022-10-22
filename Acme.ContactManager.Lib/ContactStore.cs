@@ -17,7 +17,30 @@ public class ContactStore : IContactStore {
     }
 
     public Contact Remove (Contact contact) {
-        throw new NotImplementedException();
+        Contact removed = null;
+
+        if (contact != null) {
+            // 1.- Find the contact to remove
+            int foundIndex = -1;
+            for(int i=0; i<contactCount; i++) {
+                if(contact.CompareTo(contacts[i]) == 0) {
+                    foundIndex = i;
+                    break;
+                }
+            }
+            // 2.- Remove the found contact by relocating elements above 
+            if(foundIndex >= 0) {
+                removed = contacts[foundIndex];
+                for (int i=foundIndex; i<contactCount-1; i++) 
+                    contacts[i] = contacts[i+1];
+
+                contacts[contactCount-1] = null; // Ensuring removing always let final spot empty
+                // 3.- Update counter
+                contactCount--;
+            }
+        }
+        
+        return removed;
     }
 
     public IEnumerable<Contact> Contacts { 
