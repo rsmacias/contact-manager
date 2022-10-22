@@ -17,6 +17,17 @@ public class ContactStore : IContactStore {
         // place it at the end
         contacts[contactCount] = withId;
 
+        // Sort the array 
+        // walk it forward to it's appropiate spot 
+        for (int i=contactCount; i>0; i--) {
+            if(contacts[i].CompareTo(contacts[i-1]) <= 0) {
+                // Swaping spots
+                Contact temp = contacts[i];
+                contacts[i] = contacts[i-1];
+                contacts[i-1] = temp;
+            }
+        }
+
         contactCount++;
         return withId;
     }
