@@ -6,7 +6,19 @@ public class ContactStore : IContactStore {
     int nextId = 1;
 
     public Contact Add (Contact contact) {
-        throw new NotImplementedException();
+        if (contact == null)
+            throw new ArgumentNullException("Add: null contact provided (skipping)");
+
+        Contact withId = Contact.CreateWithId(nextId++, contact);
+
+        if(contactCount == contacts.Length)
+            return null; // Add: inserting contact failed - contact list full
+
+        // place it at the end
+        contacts[contactCount] = withId;
+
+        contactCount++;
+        return withId;
     }
 
     public Contact Remove (Contact contact) {
