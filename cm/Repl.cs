@@ -29,6 +29,9 @@ internal class Repl {
                 case Commands.Quit:
                     quitSeen = true;
                     break;
+                case Commands.List:
+                    PrintList(cmd.Execute());
+                    break;
                 default:
                     cmd.Execute();
                     break;
@@ -36,6 +39,12 @@ internal class Repl {
 
             timer.Stop();
         }
+    }
+
+    private void PrintList(IEnumerable<Contact> contacts) {
+        output.WriteLine($"ID\tFirst Name\tLast Name\tStreet Address\tCity\tState\tPostal Code".Trim());
+        foreach (Contact contact in contacts)
+            output.WriteLine(contact.ToString());
     }
 
     private ICommand NextCommand() {
@@ -66,7 +75,7 @@ internal class Repl {
     }
 
     private bool ParseLine(string line, out string verb, out IReadOnlyDictionary<string, string> args) {
-        verb = line.Contains("quit") ? Commands.Quit : Commands.Add;
+        verb = line.Contains("quit") ? Commands.Quit : line.Contains("list") ? Commands.List : Commands.Add;
         var fields = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
         fields["f"] = "Robert";
         fields["l"] = "Macias";
