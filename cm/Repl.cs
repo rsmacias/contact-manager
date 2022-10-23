@@ -1,5 +1,6 @@
 using Acme.ContactManager.Lib;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace cm;
 
@@ -9,6 +10,9 @@ internal class Repl {
     readonly TextReader input;
     readonly TextWriter output;
     readonly CommandFactory factory;
+
+    readonly Regex verbRegex = new Regex(@"^(?<verb>\w+)");
+    readonly Regex fieldsRegex = new Regex(@"(?<field>\w+)=(?<value>[^;]+)");
 
     internal Repl(TextReader input, TextWriter output, ContactStore store) {
         this.input = input;
@@ -75,16 +79,22 @@ internal class Repl {
     }
 
     private bool ParseLine(string line, out string verb, out IReadOnlyDictionary<string, string> args) {
-        verb = line.Contains("quit") ? Commands.Quit : line.Contains("list") ? Commands.List : Commands.Add;
-        var fields = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-        fields["f"] = "Robert";
-        fields["l"] = "Macias";
-        fields["str"] = "Happy Straze";
-        fields["c"] = "Guayaquil";
-        fields["stt"] = "Guayas";
-        fields["pc"] = "18345";
+        bool parsedVerb = false;
+        Dictionary<string, string> fields = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+
+        Match verbMatch = verbRegex.Match(line.TrimStart());
+        if (verbMatch.Success) {
+            parsedVerb = true;
+            verb = verbMatch.Value;
+            foreach (Match match in fieldsRegex.Matches(line))
+                fields[match.Groups["field"].Value] = match.Groups["value"].Value;
+        } else { 
+            verb = Commands.Error;
+            fields["message"] = $"Unable to parse verb. ({line})";
+        }
+
         args = fields;
-        return true;
+        return parsedVerb;
     }
 
     private string Read() {
